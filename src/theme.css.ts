@@ -2,13 +2,18 @@ import { createTheme, globalStyle, style } from '@vanilla-extract/css';
 
 export const [themeClass, themeVars] = createTheme({
   color: {
-    echoGreen: '#7CF2C9',
+    echoGreen: 'mint',
     echoGreenDark: '#3FBFA1',
-    bg: 'black',
     fg: 'white'
   },
   font: {
-    body: 'arial'
+    body: '"Inter Variable", Arial, sans-serif',
+    size: {
+      small: '14px',
+      medium: '20px',
+      large: '26px',
+      XL: '32px'
+    }
   },
   spacing: {
     small: '4px',
@@ -18,9 +23,8 @@ export const [themeClass, themeVars] = createTheme({
 });
 
 export const appContainer = style({
-  backgroundColor: themeVars.color.bg,
-  color: themeVars.color.fg,
   fontFamily: themeVars.font.body,
+  fontSize: themeVars.font.size.medium,
   minHeight: '100dvh',
   display: 'flex',
   flexDirection: 'column',

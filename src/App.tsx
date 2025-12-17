@@ -1,7 +1,21 @@
+import { Theme } from '@radix-ui/themes';
+
 import { appContainer, themeClass } from './theme.css';
 
-function App() {
-  return <div className={`${themeClass} ${appContainer}`}>Hello</div>;
-}
+const App: React.FC = () => {
+  return (
+    <Theme
+      appearance="light"
+      accentColor="mint"
+      grayColor="mauve"
+      radius="medium"
+      scaling="100%"
+    >
+      <div className={`${themeClass} ${appContainer}`}>
+        Whereas disregard and contempt for human rights have resulted
+      </div>
+    </Theme>
+  );
+};
 
 export default App;
