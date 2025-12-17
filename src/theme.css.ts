@@ -2,12 +2,12 @@ import { createTheme, globalStyle, style } from '@vanilla-extract/css';
 
 export const [themeClass, themeVars] = createTheme({
   color: {
-    echoGreen: 'mint',
+    echoGreen: '#7CF2C9',
     echoGreenDark: '#3FBFA1',
     fg: 'white'
   },
   font: {
-    body: '"Inter Variable", Arial, sans-serif',
+    family: '"Inter Variable", Arial, sans-serif',
     size: {
       small: '14px',
       medium: '20px',
@@ -23,7 +23,7 @@ export const [themeClass, themeVars] = createTheme({
 });
 
 export const appContainer = style({
-  fontFamily: themeVars.font.body,
+  fontFamily: themeVars.font.family,
   fontSize: themeVars.font.size.medium,
   minHeight: '100dvh',
   display: 'flex',
