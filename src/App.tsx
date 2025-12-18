@@ -1,5 +1,5 @@
 import { Theme } from '@radix-ui/themes';
-import { SearchRepoInput } from 'src/components/search-repo-input/search-repo-input';
+import { Repositories } from 'src/components/repositories/repositories';
 import { Title } from 'src/components/title/title';
 import { TitleHighlightStyle } from 'src/components/title/title.css';
 import { appContainer, themeClass } from 'src/theme.css';
@@ -13,7 +13,7 @@ const App: React.FC = () => {
             The same images, but{' '}
             <span className={TitleHighlightStyle}>secure</span>
           </Title>
-          <SearchRepoInput />
+          <Repositories />
         </div>
       </div>
     </Theme>

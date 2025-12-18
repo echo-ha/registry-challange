@@ -5,7 +5,7 @@ import {
   type SearchRepositoriesParams
 } from 'src/api/dockerhub';
 
-export const useGetDockerhubRepositores = (
+export const useGetDockerhubRepositories = (
   params: SearchRepositoriesParams = {}
 ) => {
   return useQuery<DockerHubSearchResponse>({

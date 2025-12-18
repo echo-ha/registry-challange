@@ -1,31 +1,22 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback } from 'react';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { TextField } from '@radix-ui/themes';
-import { debounce } from 'lodash';
 
-const DEBOUNCE_DELAY = 300;
+type SearchRepoInputProps = {
+  value: string;
+  onChange: (value: string) => void;
+};
 
-export const SearchRepoInput: React.FC = () => {
-  const [value, setValue] = useState<string>('');
-
-  const runQuery = useCallback((q: string) => {
-    console.log('query:', q);
-  }, []);
-
-  const debouncedQuery = useMemo(
-    () => debounce(runQuery, DEBOUNCE_DELAY),
-    [runQuery]
-  );
-
+export const SearchRepoInput: React.FC<SearchRepoInputProps> = ({
+  value,
+  onChange
+}) => {
   const onInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setValue(e.target.value);
-      debouncedQuery(e.target.value);
+      onChange(e.target.value);
     },
-    [debouncedQuery]
+    [onChange]
   );
-
-  useEffect(() => () => debouncedQuery.cancel(), [debouncedQuery]);
 
   return (
     <TextField.Root
