@@ -4,8 +4,6 @@ import type {
   DockerHubOrganization,
   DockerHubRepositoryDetail,
   DockerHubSearchResponse,
-  GetOrganizationParams,
-  GetRepositoryParams,
   SearchRepositoriesParams
 } from 'src/api/dockerhub.types';
 
@@ -42,12 +40,10 @@ export const searchRepositories = async (
 };
 
 export const getRepository = async (
-  params: GetRepositoryParams
+  repoName: string
 ): Promise<DockerHubRepositoryDetail> => {
-  const { owner, name } = params;
-
   const url = new URL(
-    `/api/dockerhub/repositories/${owner}/${name}`,
+    `/api/dockerhub/repositories/${repoName}`,
     window.location.origin
   );
 
@@ -61,11 +57,13 @@ export const getRepository = async (
 };
 
 export const getOrganization = async (
-  params: GetOrganizationParams
+  orgName: string
 ): Promise<DockerHubOrganization> => {
-  const { orgname } = params;
+  if (!orgName) {
+    throw createError(400, 'Organization name is required');
+  }
 
-  const url = new URL(`/api/dockerhub/orgs/${orgname}`, window.location.origin);
+  const url = new URL(`/api/dockerhub/orgs/${orgName}`, window.location.origin);
 
   const response = await fetch(url.toString());
 

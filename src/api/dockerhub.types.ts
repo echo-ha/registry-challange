@@ -55,11 +55,6 @@ export interface DockerHubRepositoryDetail {
   source: string | null;
 }
 
-export interface GetRepositoryParams {
-  owner: string;
-  name: string;
-}
-
 export interface DockerHubOrganization {
   id: string;
   uuid: string;
@@ -74,8 +69,4 @@ export interface DockerHubOrganization {
   type: string;
   badge: string;
   is_active: boolean;
-}
-
-export interface GetOrganizationParams {
-  orgname: string;
 }

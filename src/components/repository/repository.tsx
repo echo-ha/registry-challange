@@ -9,15 +9,23 @@ import {
   repositoryName,
   repositoryOwner
 } from 'src/components/repository/repository.css';
+import {
+  useGetDockerhubOrganization,
+  useGetDockerhubRepository
+} from 'src/stores/repositories';
 
 type RepositoryProps = {
   repository: DockerHubRepository;
 };
 
 export const Repository: React.FC<RepositoryProps> = ({ repository }) => {
-  const logoUrl = repository.repo_owner
-    ? `https://hub.docker.com/v2/repositories/${repository.repo_owner}/${repository.repo_name}/images/`
-    : null;
+  const { data: repoDetail } = useGetDockerhubRepository(repository.repo_name);
+
+  const { data: orgData } = useGetDockerhubOrganization(repository.repo_owner);
+
+  const author =
+    repoDetail?.user || repoDetail?.hub_user || repository.repo_owner;
+  const logoUrl = orgData?.gravatar_url || null;
 
   return (
     <Box className={repositoryCard}>
@@ -53,9 +61,9 @@ export const Repository: React.FC<RepositoryProps> = ({ repository }) => {
         <Text className={repositoryName} weight="bold">
           {repository.repo_name}
         </Text>
-        {repository.repo_owner && (
+        {author && (
           <Text className={repositoryOwner} size="2" color="gray">
-            {repository.repo_owner}
+            by: {author}
           </Text>
         )}
         {repository.short_description && (

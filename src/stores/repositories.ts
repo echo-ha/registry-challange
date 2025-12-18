@@ -9,8 +9,6 @@ import type {
   DockerHubOrganization,
   DockerHubRepositoryDetail,
   DockerHubSearchResponse,
-  GetOrganizationParams,
-  GetRepositoryParams,
   SearchRepositoriesParams
 } from 'src/api/dockerhub.types';
 
@@ -27,10 +25,10 @@ export const useGetDockerhubRepositories = (
   });
 };
 
-export const useGetDockerhubRepository = (params: GetRepositoryParams) => {
+export const useGetDockerhubRepository = (repoName: string) => {
   return useQuery<DockerHubRepositoryDetail>({
-    queryKey: ['dockerhub', 'repository', params],
-    queryFn: () => getRepository(params),
+    queryKey: ['dockerhub', 'repository', repoName],
+    queryFn: () => getRepository(repoName),
     retry: false,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
@@ -39,14 +37,15 @@ export const useGetDockerhubRepository = (params: GetRepositoryParams) => {
   });
 };
 
-export const useGetDockerhubOrganization = (params: GetOrganizationParams) => {
+export const useGetDockerhubOrganization = (orgName: string) => {
   return useQuery<DockerHubOrganization>({
-    queryKey: ['dockerhub', 'organization', params],
-    queryFn: () => getOrganization(params),
+    queryKey: ['dockerhub', 'organization', orgName],
+    queryFn: () => getOrganization(orgName),
     retry: false,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
     refetchOnReconnect: false,
-    staleTime: 1000 * 60
+    staleTime: 1000 * 60,
+    enabled: !!orgName
   });
 };
