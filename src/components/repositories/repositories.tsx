@@ -35,12 +35,6 @@ export const Repositories: React.FC = () => {
     name: debouncedSearchValue || '*'
   });
 
-  useEffect(() => {
-    if (data) {
-      console.log('Received data:', data);
-    }
-  }, [data]);
-
   return (
     <div className={repositoriesContainer}>
       <SearchRepoInput value={searchValue} onChange={setSearchValue} />
