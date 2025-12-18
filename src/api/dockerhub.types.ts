@@ -20,41 +20,6 @@ export interface SearchRepositoriesParams {
   ordering?: string;
 }
 
-export interface DockerHubRepositoryDetail {
-  user: string;
-  name: string;
-  namespace: string;
-  repository_type: string;
-  status: number;
-  status_description: string;
-  description: string;
-  is_private: boolean;
-  is_automated: boolean;
-  star_count: number;
-  pull_count: number;
-  last_updated: string;
-  last_modified: string;
-  date_registered: string;
-  collaborator_count: number;
-  affiliation: string | null;
-  hub_user: string;
-  has_starred: boolean;
-  permissions: {
-    read: boolean;
-    write: boolean;
-    admin: boolean;
-  };
-  media_types: string[];
-  content_types: string[];
-  categories: string[];
-  immutable_tags_settings: {
-    enabled: boolean;
-    rules: string[];
-  };
-  storage_size: number;
-  source: string | null;
-}
-
 export interface DockerHubOrganization {
   id: string;
   uuid: string;
