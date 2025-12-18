@@ -26,15 +26,24 @@ export interface SearchRepositoriesParams {
   ordering?: string;
 }
 
+const enforceDescOrdering = (ordering?: string): string => {
+  if (!ordering) {
+    return DEFAULT_ORDERING;
+  }
+  return ordering.startsWith('-') ? ordering : `-${ordering}`;
+};
+
 export const searchRepositories = async (
   params: SearchRepositoriesParams = {}
 ): Promise<DockerHubSearchResponse> => {
-  const { name = '*', ordering = DEFAULT_ORDERING } = params;
+  const { name = '*', ordering } = params;
+
+  const normalizedOrdering = enforceDescOrdering(ordering);
 
   const url = new URL(DOCKERHUB_BASE_URL);
   url.searchParams.set('query', name);
   url.searchParams.set('page_size', DEFAULT_PAGE_SIZE.toString());
-  url.searchParams.set('ordering', ordering);
+  url.searchParams.set('ordering', normalizedOrdering);
 
   const response = await fetch(url.toString());
 
