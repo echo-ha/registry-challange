@@ -36,7 +36,16 @@ export const searchRepositories = async (
     throw createError(response.status, response.statusText);
   }
 
-  return response.json();
+  const data: DockerHubSearchResponse = await response.json();
+  data.results.forEach(result => {
+    const owner = result.repo_name.split('/');
+
+    if (owner.length == 2) {
+      result.repo_owner = owner[0];
+    }
+  });
+
+  return data;
 };
 
 export const getRepository = async (
