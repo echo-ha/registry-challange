@@ -10,6 +10,10 @@ export const useGetDockerhubRepositories = (
 ) => {
   return useQuery<DockerHubSearchResponse>({
     queryKey: ['dockerhub', 'repositories', params.name, params.ordering],
-    queryFn: () => searchRepositories(params)
+    queryFn: () => searchRepositories(params),
+    retry: false,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false
   });
 };
