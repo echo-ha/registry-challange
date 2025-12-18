@@ -1,6 +1,6 @@
 import { Box, Text } from '@radix-ui/themes';
 
-import { type DockerHubRepository } from 'src/api/dockerhub';
+import type { DockerHubRepository } from 'src/api/dockerhub.types';
 import {
   repositoryCard,
   repositoryDescription,
