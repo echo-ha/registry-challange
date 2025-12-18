@@ -9,22 +9,16 @@ import {
   repositoryName,
   repositoryOwner
 } from 'src/components/repository/repository.css';
-import {
-  useGetDockerhubOrganization,
-  useGetDockerhubRepository
-} from 'src/stores/repositories';
+import { useGetDockerhubOrganization } from 'src/stores/repositories';
 
 type RepositoryProps = {
   repository: DockerHubRepository;
 };
 
 export const Repository: React.FC<RepositoryProps> = ({ repository }) => {
-  const { data: repoDetail } = useGetDockerhubRepository(repository.repo_name);
-
   const { data: orgData } = useGetDockerhubOrganization(repository.repo_owner);
 
-  const author =
-    repoDetail?.user || repoDetail?.hub_user || repository.repo_owner;
+  const author = repository.repo_owner;
   const logoUrl = orgData?.gravatar_url || null;
 
   return (
