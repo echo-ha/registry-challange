@@ -6,13 +6,11 @@ export const repositoriesContainer = style({
   display: 'flex',
   flexDirection: 'column',
   gap: themeVars.spacing.large,
-  width: '100%',
-  maxWidth: 1200
+  alignItems: 'center'
 });
 
 export const repositoriesList = style({
   display: 'grid',
   gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-  gap: themeVars.spacing.large,
-  width: '100%'
+  gap: themeVars.spacing.large
 });
