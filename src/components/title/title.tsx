@@ -1,5 +1,6 @@
 import type { PropsWithChildren } from 'react';
 import { Text } from '@radix-ui/themes';
+
 import { BoldTitleStyle, TitleStyle } from 'src/components/title/title.css';
 
 type TitleProps = {
