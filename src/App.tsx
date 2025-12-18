@@ -1,18 +1,20 @@
 import { Theme } from '@radix-ui/themes';
-
-import { appContainer, themeClass } from './theme.css';
+import { Repositories } from 'src/components/repositories/repositories';
+import { Title } from 'src/components/title/title';
+import { TitleHighlightStyle } from 'src/components/title/title.css';
+import { appContainer, themeClass } from 'src/theme.css';
 
 const App: React.FC = () => {
   return (
-    <Theme
-      appearance="light"
-      accentColor="mint"
-      grayColor="mauve"
-      radius="medium"
-      scaling="100%"
-    >
+    <Theme appearance="dark" grayColor="mauve" radius="medium" scaling="100%">
       <div className={`${themeClass} ${appContainer}`}>
-        Whereas disregard and contempt for human rights have resulted
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <Title>
+            The same images, but{' '}
+            <span className={TitleHighlightStyle}>secure</span>
+          </Title>
+          <Repositories />
+        </div>
       </div>
     </Theme>
   );
