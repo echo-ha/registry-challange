@@ -1,5 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import { debounce } from 'lodash';
+
+import { Loader } from 'src/components/loader/loader';
+import {
+  repositoriesContainer,
+  repositoriesList
+} from 'src/components/repositories/repositories.css';
+import { Repository } from 'src/components/repository/repository';
 import { SearchRepoInput } from 'src/components/search-repo-input/search-repo-input';
 import { useGetDockerhubRepositories } from 'src/stores/repositories';
 
@@ -24,7 +31,7 @@ export const Repositories: React.FC = () => {
     };
   }, [searchValue, debouncedSetSearch]);
 
-  const { data } = useGetDockerhubRepositories({
+  const { data, isLoading } = useGetDockerhubRepositories({
     name: debouncedSearchValue || '*'
   });
 
@@ -35,8 +42,19 @@ export const Repositories: React.FC = () => {
   }, [data]);
 
   return (
-    <div>
+    <div className={repositoriesContainer}>
       <SearchRepoInput value={searchValue} onChange={setSearchValue} />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        data?.results && (
+          <div className={repositoriesList}>
+            {data.results.map(repository => (
+              <Repository key={repository.repo_name} repository={repository} />
+            ))}
+          </div>
+        )
+      )}
     </div>
   );
 };
