@@ -17,5 +17,14 @@ export default defineConfig({
     alias: {
       src: resolve(__dirname, 'src')
     }
+  },
+  server: {
+    proxy: {
+      '/api/dockerhub': {
+        target: 'https://hub.docker.com',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/api\/dockerhub/, '/v2')
+      }
+    }
   }
 });
