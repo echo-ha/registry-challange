@@ -1,6 +1,9 @@
 import createError from 'http-errors';
 
 const DOCKERHUB_BASE_URL = 'https://hub.docker.com/v2/search/repositories/';
+const CORS_PROXY_URL =
+  import.meta.env.VITE_CORS_PROXY_URL || 'https://corsproxy.io/?';
+const USE_CORS_PROXY = import.meta.env.VITE_USE_CORS_PROXY !== 'false';
 const DEFAULT_PAGE_SIZE = 10;
 const DEFAULT_ORDERING = '-star_count';
 
@@ -45,7 +48,12 @@ export const searchRepositories = async (
   url.searchParams.set('page_size', DEFAULT_PAGE_SIZE.toString());
   url.searchParams.set('ordering', normalizedOrdering);
 
-  const response = await fetch(url.toString());
+  const targetUrl = url.toString();
+  const fetchUrl = USE_CORS_PROXY
+    ? `${CORS_PROXY_URL}${encodeURIComponent(targetUrl)}`
+    : targetUrl;
+
+  const response = await fetch(fetchUrl);
 
   if (!response.ok) {
     throw createError(response.status, response.statusText);
