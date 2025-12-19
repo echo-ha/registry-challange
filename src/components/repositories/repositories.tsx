@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { debounce } from 'lodash';
 
+import { EmptyState } from 'src/components/empty-state/empty-state';
 import { Loader } from 'src/components/loader/loader';
 import { repositoriesContainer } from 'src/components/repositories/repositories.css';
 import { RepositoryList } from 'src/components/repository-list/repository-list';
@@ -32,13 +33,17 @@ export const Repositories: React.FC = () => {
     name: debouncedSearchValue || '*'
   });
 
+  const hasResults = data?.results && data.results.length > 0;
+
   return (
     <div className={repositoriesContainer}>
       <SearchRepoInput value={searchValue} onChange={setSearchValue} />
       {isLoading ? (
         <Loader />
+      ) : hasResults ? (
+        <RepositoryList repositories={data.results} />
       ) : (
-        data?.results && <RepositoryList repositories={data.results} />
+        <EmptyState />
       )}
     </div>
   );
