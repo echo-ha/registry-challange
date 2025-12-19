@@ -12,6 +12,9 @@ export const repositoryCard = style({
   border: '1px solid var(--gray-6)',
   transition: 'all 0.2s ease',
   cursor: 'pointer',
+  width: '100%',
+  maxWidth: '100%',
+  overflow: 'hidden',
   ':hover': {
     backgroundColor: 'var(--gray-4)',
     borderColor: 'var(--gray-7)',
