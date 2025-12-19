@@ -27,7 +27,6 @@ export const [themeClass, themeVars] = createTheme({
 export const appContainer = style({
   fontFamily: themeVars.font.family,
   fontSize: themeVars.font.size.medium,
-  minHeight: '100dvh',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -37,7 +36,6 @@ export const appContainer = style({
 globalStyle('html, body', {
   margin: 0,
   width: '100%',
-  minHeight: '100dvh',
   transition: 'all 0.3s ease-in-out'
 });
 
