@@ -4,6 +4,8 @@ import type { DockerHubRepository } from 'src/api/dockerhub.types';
 import {
   repositoryCard,
   repositoryDescription,
+  repositoryHeader,
+  repositoryInfo,
   repositoryName,
   repositoryOwner
 } from 'src/components/repository/repository.css';
@@ -18,22 +20,24 @@ export const Repository: React.FC<RepositoryProps> = ({ repository }) => {
 
   return (
     <Box className={repositoryCard}>
-      <RepositoryLogo repository={repository} />
-      <div style={{ flex: 1, minWidth: 0 }}>
-        <Text className={repositoryName} weight="bold">
-          {repository.repo_name}
-        </Text>
-        {author && (
-          <Text className={repositoryOwner} size="2" color="gray">
-            by: {author}
+      <div className={repositoryHeader}>
+        <RepositoryLogo repository={repository} />
+        <div className={repositoryInfo}>
+          <Text className={repositoryName} weight="bold">
+            {repository.repo_name}
           </Text>
-        )}
-        {repository.short_description && (
-          <Text className={repositoryDescription} size="2" color="gray">
-            {repository.short_description}
-          </Text>
-        )}
+          {author && (
+            <Text className={repositoryOwner} size="2" color="gray">
+              by: {author}
+            </Text>
+          )}
+        </div>
       </div>
+      {repository.short_description && (
+        <Text className={repositoryDescription} size="2" color="gray">
+          {repository.short_description}
+        </Text>
+      )}
     </Box>
   );
 };

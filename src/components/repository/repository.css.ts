@@ -4,7 +4,8 @@ import { themeVars } from 'src/theme.css';
 
 export const repositoryCard = style({
   display: 'flex',
-  gap: themeVars.spacing.large,
+  flexDirection: 'column',
+  gap: themeVars.spacing.medium,
   padding: themeVars.spacing.large,
   borderRadius: 8,
   backgroundColor: 'var(--gray-3)',
@@ -17,6 +18,20 @@ export const repositoryCard = style({
     transform: 'translateY(-2px)',
     boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
   }
+});
+
+export const repositoryHeader = style({
+  display: 'flex',
+  gap: themeVars.spacing.large,
+  alignItems: 'flex-start'
+});
+
+export const repositoryInfo = style({
+  display: 'flex',
+  flexDirection: 'column',
+  flex: 1,
+  minWidth: 0,
+  gap: themeVars.spacing.small
 });
 
 export const repositoryLogo = style({
@@ -39,7 +54,6 @@ export const repositoryLogoImage = style({
 
 export const repositoryName = style({
   display: 'block',
-  marginBottom: themeVars.spacing.small,
   fontSize: themeVars.font.size.medium,
   overflow: 'hidden',
   textOverflow: 'ellipsis',
@@ -48,7 +62,6 @@ export const repositoryName = style({
 
 export const repositoryOwner = style({
   display: 'block',
-  marginBottom: themeVars.spacing.small,
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap'
