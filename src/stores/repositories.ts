@@ -12,11 +12,7 @@ export const useGetDockerhubRepositories = (
 ) => {
   return useQuery<DockerHubSearchResponse>({
     queryKey: ['dockerhub', 'repositories', params],
-    queryFn: () => searchRepositories(params),
-    retry: false,
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-    refetchOnReconnect: false
+    queryFn: () => searchRepositories(params)
   });
 };
 
@@ -24,10 +20,6 @@ export const useGetDockerhubOrganization = (orgName: string) => {
   return useQuery<DockerHubOrganization>({
     queryKey: ['dockerhub', 'organization', orgName],
     queryFn: () => getOrganization(orgName),
-    retry: false,
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-    refetchOnReconnect: false,
     staleTime: 1000 * 60,
     enabled: !!orgName
   });
