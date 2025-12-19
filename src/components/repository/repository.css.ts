@@ -70,6 +70,19 @@ export const repositoryOwner = style({
   whiteSpace: 'nowrap'
 });
 
+export const repositoryOfficial = style({
+  color: themeVars.color.echoGreen,
+  display: 'flex',
+  alignItems: 'center',
+  gap: themeVars.spacing.small,
+  selectors: {
+    '& svg': {
+      color: themeVars.color.echoGreen,
+      fill: themeVars.color.echoGreen
+    }
+  }
+});
+
 export const repositoryDescription = style({
   display: '-webkit-box',
   WebkitLineClamp: 2,
