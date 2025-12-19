@@ -30,7 +30,8 @@ export const appContainer = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  padding: themeVars.spacing.medium
+  padding: themeVars.spacing.medium,
+  gap: themeVars.spacing.large
 });
 
 globalStyle('html, body', {

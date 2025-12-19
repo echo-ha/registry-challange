@@ -9,20 +9,11 @@ const App: React.FC = () => {
   return (
     <Theme appearance="dark" grayColor="mauve" radius="medium" scaling="100%">
       <div className={`${themeClass} ${appContainer}`}>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 16,
-            alignItems: 'center'
-          }}
-        >
-          <Title style={{ width: 400 }}>
-            The same images, but{' '}
-            <span className={TitleHighlightStyle}>secure</span>
-          </Title>
-          <Repositories />
-        </div>
+        <Title style={{ width: 400 }}>
+          The same images, but{' '}
+          <span className={TitleHighlightStyle}>secure</span>
+        </Title>
+        <Repositories />
       </div>
     </Theme>
   );
