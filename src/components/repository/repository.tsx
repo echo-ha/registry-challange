@@ -1,5 +1,5 @@
 import { CheckCircledIcon } from '@radix-ui/react-icons';
-import { Box, Flex, Text } from '@radix-ui/themes';
+import { Flex, Text } from '@radix-ui/themes';
 
 import { OFFICIAL_REPO_OWNER } from 'src/api/dockerhub';
 import type { DockerHubRepository } from 'src/api/dockerhub.types';
@@ -34,7 +34,7 @@ export const Repository: React.FC<RepositoryProps> = ({ repository }) => {
   ) : null;
 
   return (
-    <Box className={repositoryCard}>
+    <Flex className={repositoryCard}>
       <div className={repositoryHeader}>
         <RepositoryLogo repository={repository} />
         <div className={repositoryInfo}>
@@ -49,6 +49,6 @@ export const Repository: React.FC<RepositoryProps> = ({ repository }) => {
           {repository.short_description}
         </Text>
       )}
-    </Box>
+    </Flex>
   );
 };
