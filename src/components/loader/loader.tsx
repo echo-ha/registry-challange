@@ -31,7 +31,7 @@ const SkeletonCard: React.FC = () => {
 export const Loader: React.FC = () => {
   return (
     <div className={loader}>
-      {Array.from({ length: 6 }).map((_, index) => (
+      {Array.from({ length: 9 }).map((_, index) => (
         <SkeletonCard key={index} />
       ))}
     </div>
