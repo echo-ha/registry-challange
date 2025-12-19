@@ -37,7 +37,8 @@ export const appContainer = style({
 globalStyle('html, body', {
   margin: 0,
   width: '100%',
-  minHeight: '100dvh'
+  minHeight: '100dvh',
+  transition: 'all 0.3s ease-in-out'
 });
 
 globalStyle('body', {
