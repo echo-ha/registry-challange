@@ -57,7 +57,6 @@ export const repositoryLogoImage = style({
 
 export const repositoryName = style({
   display: 'block',
-  fontSize: themeVars.font.size.medium,
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap'

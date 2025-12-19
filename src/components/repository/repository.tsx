@@ -38,7 +38,7 @@ export const Repository: React.FC<RepositoryProps> = ({ repository }) => {
       <div className={repositoryHeader}>
         <RepositoryLogo repository={repository} />
         <div className={repositoryInfo}>
-          <Text className={repositoryName} weight="bold">
+          <Text className={repositoryName} size="4" weight="bold">
             {repository.repo_name}
           </Text>
           {repoBy}
