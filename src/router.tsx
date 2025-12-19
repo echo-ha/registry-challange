@@ -22,6 +22,11 @@ const indexRoute = createRoute({
 const repositoryRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/repository',
+  validateSearch: (search: Record<string, unknown>) => {
+    return {
+      name: (search.name as string) || undefined
+    };
+  },
   component: RepositoryPage
 });
 

@@ -1,5 +1,6 @@
 import { CheckCircledIcon } from '@radix-ui/react-icons';
 import { Flex, Text } from '@radix-ui/themes';
+import { useNavigate } from '@tanstack/react-router';
 
 import { OFFICIAL_REPO_OWNER } from 'src/api/dockerhub';
 import type { DockerHubRepository } from 'src/api/dockerhub.types';
@@ -19,6 +20,7 @@ type RepositoryProps = {
 };
 
 export const Repository: React.FC<RepositoryProps> = ({ repository }) => {
+  const navigate = useNavigate();
   const author = repository.repo_owner;
   const isOfficial = author === OFFICIAL_REPO_OWNER;
 
@@ -33,8 +35,12 @@ export const Repository: React.FC<RepositoryProps> = ({ repository }) => {
     </Text>
   ) : null;
 
+  const handleClick = () => {
+    navigate({ to: '/repository', search: { name: repository.repo_name } });
+  };
+
   return (
-    <Flex className={repositoryCard}>
+    <Flex className={repositoryCard} onClick={handleClick}>
       <div className={repositoryHeader}>
         <RepositoryLogo repository={repository} />
         <div className={repositoryInfo}>
