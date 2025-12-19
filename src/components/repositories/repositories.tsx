@@ -34,12 +34,11 @@ export const Repositories: React.FC = () => {
   });
 
   const hasResults = data?.results && data.results.length > 0;
-  const x = localStorage.getItem('forceLoader');
 
   return (
     <div className={repositoriesContainer}>
       <SearchRepoInput value={searchValue} onChange={setSearchValue} />
-      {isLoading || x ? (
+      {isLoading ? (
         <Loader />
       ) : hasResults ? (
         <RepositoryList repositories={data.results} />
