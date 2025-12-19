@@ -18,7 +18,9 @@ export const [themeClass, themeVars] = createTheme({
   spacing: {
     small: '4px',
     medium: '8px',
-    large: '16px'
+    large: '16px',
+    XL: '24px',
+    XXL: '32px'
   }
 });
 

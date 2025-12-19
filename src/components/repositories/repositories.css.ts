@@ -11,6 +11,7 @@ export const repositoriesContainer = style({
 
 export const repositoriesList = style({
   display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-  gap: themeVars.spacing.large
+  gridTemplateColumns: 'repeat(3, 1fr)',
+  gap: themeVars.spacing.large,
+  padding: `0 ${themeVars.spacing.XXL}`
 });
