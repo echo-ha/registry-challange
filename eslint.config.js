@@ -32,12 +32,25 @@ export default defineConfig([
         {
           groups: [
             ['^react', '^@?\\w'], // external packages
+            ['^src/'], // src aliases
             ['^@/'], // internal aliases
             ['^\\.'] // relative imports
           ]
         }
       ],
-      'simple-import-sort/exports': 'error'
+      'simple-import-sort/exports': 'error',
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['./*', '../*'],
+              message:
+                'Use absolute imports with "src/" instead of relative imports (e.g., use "src/components/..." instead of "./..." or "../...")'
+            }
+          ]
+        }
+      ]
     }
   },
   prettier

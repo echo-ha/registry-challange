@@ -1,18 +1,21 @@
-import type { PropsWithChildren } from 'react';
 import { Text } from '@radix-ui/themes';
-import { BoldTitleStyle, TitleStyle } from 'src/components/title/title.css';
 
 type TitleProps = {
   bold?: boolean;
-};
+} & React.ComponentProps<typeof Text>;
 
-export const Title: React.FC<PropsWithChildren & TitleProps> = ({
+export const Title: React.FC<TitleProps> = ({
   children,
   bold,
+  size = '6',
   ...props
 }) => {
+  if (bold) {
+    props.weight = 'bold';
+  }
+
   return (
-    <Text className={bold ? BoldTitleStyle : TitleStyle} {...props}>
+    <Text size={size} {...props}>
       {children}
     </Text>
   );

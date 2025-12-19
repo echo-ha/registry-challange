@@ -2,6 +2,8 @@ import { useCallback } from 'react';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { TextField } from '@radix-ui/themes';
 
+import { searchRepoInput } from 'src/components/search-repo-input/search-repo-input.css';
+
 type SearchRepoInputProps = {
   value: string;
   onChange: (value: string) => void;
@@ -20,6 +22,7 @@ export const SearchRepoInput: React.FC<SearchRepoInputProps> = ({
 
   return (
     <TextField.Root
+      className={searchRepoInput}
       placeholder="Search any image..."
       onChange={onInputChange}
       value={value}

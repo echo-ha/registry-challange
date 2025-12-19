@@ -18,24 +18,30 @@ export const [themeClass, themeVars] = createTheme({
   spacing: {
     small: '4px',
     medium: '8px',
-    large: '16px'
+    large: '16px',
+    XL: '24px',
+    XXL: '32px'
   }
 });
 
 export const appContainer = style({
   fontFamily: themeVars.font.family,
   fontSize: themeVars.font.size.medium,
-  minHeight: '100dvh',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  padding: themeVars.spacing.medium
+  padding: themeVars.spacing.medium,
+  gap: themeVars.spacing.large
+});
+
+export const mainTitle = style({
+  width: 400
 });
 
 globalStyle('html, body', {
   margin: 0,
   width: '100%',
-  minHeight: '100dvh'
+  transition: 'all 0.3s ease-in-out'
 });
 
 globalStyle('body', {

@@ -1,30 +1,15 @@
 import createError from 'http-errors';
 
-const PROXY_BASE_URL = '/api/dockerhub/search/repositories/';
+import type {
+  DockerHubOrganization,
+  DockerHubSearchResponse,
+  SearchRepositoriesParams
+} from 'src/api/dockerhub.types';
+
+const PROXY_BASE_URL = '/api/dockerhub';
 const DEFAULT_PAGE_SIZE = 10;
 const DEFAULT_ORDERING = '-star_count';
-
-export interface DockerHubRepository {
-  repo_name: string;
-  short_description: string;
-  star_count: number;
-  pull_count: number;
-  repo_owner: string;
-  is_automated: boolean;
-  is_official: boolean;
-}
-
-export interface DockerHubSearchResponse {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: DockerHubRepository[];
-}
-
-export interface SearchRepositoriesParams {
-  name?: string;
-  ordering?: string;
-}
+export const OFFICIAL_REPO_OWNER = 'library'; // according to dockerhub api
 
 const enforceDescOrdering = (ordering?: string): string => {
   if (!ordering) {
@@ -40,10 +25,45 @@ export const searchRepositories = async (
 
   const normalizedOrdering = enforceDescOrdering(ordering);
 
-  const url = new URL(PROXY_BASE_URL, window.location.origin);
+  const url = new URL(
+    `${PROXY_BASE_URL}/search/repositories/`,
+    window.location.origin
+  );
   url.searchParams.set('query', name);
   url.searchParams.set('page_size', DEFAULT_PAGE_SIZE.toString());
   url.searchParams.set('ordering', normalizedOrdering);
+
+  const response = await fetch(url.toString());
+
+  if (!response.ok) {
+    throw createError(response.status, response.statusText);
+  }
+
+  const data: DockerHubSearchResponse = await response.json();
+  data.results.forEach(repo => {
+    const owner = repo.repo_name.split('/');
+
+    if (owner.length == 2) {
+      repo.repo_owner = owner[0];
+    } else if (repo.is_official) {
+      repo.repo_owner = OFFICIAL_REPO_OWNER;
+    }
+  });
+
+  return data;
+};
+
+export const getOrganization = async (
+  orgName: string
+): Promise<DockerHubOrganization> => {
+  if (!orgName) {
+    throw createError(400, 'Organization name is required');
+  }
+
+  const url = new URL(
+    `${PROXY_BASE_URL}/orgs/${orgName}`,
+    window.location.origin
+  );
 
   const response = await fetch(url.toString());
 
