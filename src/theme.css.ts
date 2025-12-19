@@ -34,6 +34,10 @@ export const appContainer = style({
   gap: themeVars.spacing.large
 });
 
+export const mainTitle = style({
+  width: 400
+});
+
 globalStyle('html, body', {
   margin: 0,
   width: '100%',
