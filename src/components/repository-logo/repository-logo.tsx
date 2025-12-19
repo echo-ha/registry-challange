@@ -33,7 +33,7 @@ export const RepositoryLogo: React.FC<RepositoryLogoProps> = ({
           if (currentSrc === logoUrl && orgLogoUrl) {
             img.onerror = null;
             img.src = orgLogoUrl;
-          } else if (currentSrc === orgLogoUrl || !orgLogoUrl) {
+          } else {
             img.onerror = null;
             img.src = fallbackRepoLogo;
           }
