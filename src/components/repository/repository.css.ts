@@ -39,8 +39,6 @@ export const repositoryInfo = style({
 
 export const repositoryLogo = style({
   flexShrink: 0,
-  width: 48,
-  height: 48,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',

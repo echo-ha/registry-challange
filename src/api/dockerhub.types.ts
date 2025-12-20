@@ -35,3 +35,32 @@ export interface DockerHubOrganization {
   badge: string;
   is_active: boolean;
 }
+
+export interface DockerHubRepositoryDetails {
+  user: string;
+  name: string;
+  namespace: string;
+  repository_type: string;
+  status: number;
+  description: string;
+  star_count: number;
+  pull_count: number;
+  last_updated: string;
+  date_registered: string;
+  collaborator_count: number;
+}
+
+export interface DockerHubTag {
+  name: string;
+  full_size: number;
+  id: number;
+  last_updated: string;
+  last_updater_username: string;
+}
+
+export interface DockerHubTagResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: DockerHubTag[];
+}

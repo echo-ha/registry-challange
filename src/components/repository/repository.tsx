@@ -1,17 +1,14 @@
-import { CheckCircledIcon } from '@radix-ui/react-icons';
 import { Flex, Text } from '@radix-ui/themes';
 import { useNavigate } from '@tanstack/react-router';
 
-import { OFFICIAL_REPO_OWNER } from 'src/api/dockerhub';
 import type { DockerHubRepository } from 'src/api/dockerhub.types';
+import { RepoOwner } from 'src/components/repo-owner/repo-owner';
 import {
   repositoryCard,
   repositoryDescription,
   repositoryHeader,
   repositoryInfo,
-  repositoryName,
-  repositoryOfficial,
-  repositoryOwner
+  repositoryName
 } from 'src/components/repository/repository.css';
 import { RepositoryLogo } from 'src/components/repository-logo/repository-logo';
 
@@ -21,19 +18,6 @@ type RepositoryProps = {
 
 export const Repository: React.FC<RepositoryProps> = ({ repository }) => {
   const navigate = useNavigate();
-  const author = repository.repo_owner;
-  const isOfficial = author === OFFICIAL_REPO_OWNER;
-
-  const repoBy = isOfficial ? (
-    <Flex className={repositoryOfficial} align="center" gap="1">
-      <CheckCircledIcon />
-      <Text size="2">Official repository</Text>
-    </Flex>
-  ) : author ? (
-    <Text className={repositoryOwner} size="2" color="gray">
-      by: {author}
-    </Text>
-  ) : null;
 
   const handleClick = () => {
     navigate({ to: '/repository', search: { name: repository.repo_name } });
@@ -42,12 +26,15 @@ export const Repository: React.FC<RepositoryProps> = ({ repository }) => {
   return (
     <Flex className={repositoryCard} onClick={handleClick}>
       <div className={repositoryHeader}>
-        <RepositoryLogo repository={repository} />
+        <RepositoryLogo
+          repo_owner={repository.repo_owner}
+          repo_name={repository.repo_name}
+        />
         <div className={repositoryInfo}>
           <Text className={repositoryName} size="4" weight="bold">
             {repository.repo_name}
           </Text>
-          {repoBy}
+          <RepoOwner owner={repository.repo_owner} />
         </div>
       </div>
       {repository.short_description && (

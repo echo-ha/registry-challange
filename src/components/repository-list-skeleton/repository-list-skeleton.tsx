@@ -28,7 +28,7 @@ const SkeletonCard: React.FC = () => {
   );
 };
 
-export const Loader: React.FC = () => {
+export const RepositoryListSkeleton: React.FC = () => {
   return (
     <div className={repositoriesList}>
       {Array.from({ length: 9 }).map((_, index) => (

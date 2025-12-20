@@ -1,8 +1,10 @@
-import createError from 'http-errors';
+import createError, { BadRequest } from 'http-errors';
 
 import type {
   DockerHubOrganization,
+  DockerHubRepositoryDetails,
   DockerHubSearchResponse,
+  DockerHubTagResponse,
   SearchRepositoriesParams
 } from 'src/api/dockerhub.types';
 
@@ -16,6 +18,12 @@ const enforceDescOrdering = (ordering?: string): string => {
     return DEFAULT_ORDERING;
   }
   return ordering.startsWith('-') ? ordering : `-${ordering}`;
+};
+
+const validateRepoName = (repoName: string) => {
+  if (!repoName || !repoName.includes('/')) {
+    throw BadRequest('Repository name is required');
+  }
 };
 
 export const searchRepositories = async (
@@ -57,11 +65,48 @@ export const getOrganization = async (
   orgName: string
 ): Promise<DockerHubOrganization> => {
   if (!orgName) {
-    throw createError(400, 'Organization name is required');
+    throw BadRequest('Organization name is required');
   }
 
   const url = new URL(
     `${PROXY_BASE_URL}/orgs/${orgName}`,
+    window.location.origin
+  );
+
+  const response = await fetch(url.toString());
+
+  if (!response.ok) {
+    throw createError(response.status, response.statusText);
+  }
+
+  return response.json();
+};
+
+export const getRepositoryDetails = async (
+  repoName: string
+): Promise<DockerHubRepositoryDetails> => {
+  validateRepoName(repoName);
+  const url = new URL(
+    `${PROXY_BASE_URL}/repositories/${repoName}`,
+    window.location.origin
+  );
+
+  const response = await fetch(url.toString());
+
+  if (!response.ok) {
+    throw createError(response.status, response.statusText);
+  }
+
+  return response.json();
+};
+
+export const getRepositoryTags = async (
+  repoName: string
+): Promise<DockerHubTagResponse> => {
+  validateRepoName(repoName);
+  const [namespace, name] = repoName.split('/');
+  const url = new URL(
+    `${PROXY_BASE_URL}/namespaces/${namespace}/repositories/${name}/tags`,
     window.location.origin
   );
 

@@ -2,15 +2,15 @@ import {
   createRootRoute,
   createRoute,
   createRouter,
-  Outlet,
   redirect
 } from '@tanstack/react-router';
 
+import { RootLayout } from 'src/components/root-layout/root-layout';
 import { HomePage } from 'src/pages/home';
-import { RepositoryPage } from 'src/pages/repository';
+import { RepositoryDetailsPage } from 'src/pages/repository-details';
 
 const rootRoute = createRootRoute({
-  component: Outlet
+  component: RootLayout
 });
 
 const indexRoute = createRoute({
@@ -27,7 +27,7 @@ const repositoryRoute = createRoute({
       name: (search.name as string) || undefined
     };
   },
-  component: RepositoryPage
+  component: RepositoryDetailsPage
 });
 
 const fallbackRoute = createRoute({

@@ -2,9 +2,9 @@ import { useEffect, useMemo, useState } from 'react';
 import { debounce } from 'lodash';
 
 import { EmptyState } from 'src/components/empty-state/empty-state';
-import { Loader } from 'src/components/loader/loader';
 import { repositoriesContainer } from 'src/components/repositories/repositories.css';
 import { RepositoryList } from 'src/components/repository-list/repository-list';
+import { RepositoryListSkeleton } from 'src/components/repository-list-skeleton/repository-list-skeleton';
 import { SearchRepoInput } from 'src/components/search-repo-input/search-repo-input';
 import { useGetDockerhubRepositories } from 'src/stores/repositories';
 
@@ -39,7 +39,7 @@ export const Repositories: React.FC = () => {
     <div className={repositoriesContainer}>
       <SearchRepoInput value={searchValue} onChange={setSearchValue} />
       {isLoading ? (
-        <Loader />
+        <RepositoryListSkeleton />
       ) : hasResults ? (
         <RepositoryList repositories={data.results} />
       ) : (
