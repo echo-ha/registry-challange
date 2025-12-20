@@ -20,6 +20,12 @@ const enforceDescOrdering = (ordering?: string): string => {
   return ordering.startsWith('-') ? ordering : `-${ordering}`;
 };
 
+const validateRepoName = (repoName: string) => {
+  if (!repoName || !repoName.includes('/')) {
+    throw BadRequest('Repository name is required');
+  }
+};
+
 export const searchRepositories = async (
   params: SearchRepositoriesParams = {}
 ): Promise<DockerHubSearchResponse> => {
@@ -79,10 +85,7 @@ export const getOrganization = async (
 export const getRepositoryDetails = async (
   repoName: string
 ): Promise<DockerHubRepositoryDetails> => {
-  if (!repoName || !repoName.includes('/')) {
-    throw BadRequest('Repository name is required');
-  }
-
+  validateRepoName(repoName);
   const url = new URL(
     `${PROXY_BASE_URL}/repositories/${repoName}`,
     window.location.origin
@@ -100,12 +103,8 @@ export const getRepositoryDetails = async (
 export const getRepositoryTags = async (
   repoName: string
 ): Promise<DockerHubTagResponse> => {
-  if (!repoName || !repoName.includes('/')) {
-    throw BadRequest('Repository name is required');
-  }
-
+  validateRepoName(repoName);
   const [namespace, name] = repoName.split('/');
-
   const url = new URL(
     `${PROXY_BASE_URL}/namespaces/${namespace}/repositories/${name}/tags`,
     window.location.origin
