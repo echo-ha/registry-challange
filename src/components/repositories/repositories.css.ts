@@ -13,6 +13,5 @@ export const repositoriesList = style({
   display: 'grid',
   gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
   gap: themeVars.spacing.large,
-  padding: `0 ${themeVars.spacing.XXL}`,
   width: '1200px'
 });
