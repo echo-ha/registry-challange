@@ -2,7 +2,6 @@ import { CheckCircledIcon } from '@radix-ui/react-icons';
 import { Flex, Text } from '@radix-ui/themes';
 
 import { OFFICIAL_REPO_OWNER } from 'src/api/dockerhub';
-import { Loader } from 'src/components/loader/loader';
 import {
   repositoryDescription,
   repositoryHeader,
@@ -11,6 +10,7 @@ import {
   repositoryOfficial,
   repositoryOwner
 } from 'src/components/repository/repository.css';
+import { RepositoryListSkeleton } from 'src/components/repository-list-skeleton/repository-list-skeleton';
 import { RepositoryLogo } from 'src/components/repository-logo/repository-logo';
 import { useGetRepositoryDetails } from 'src/stores/repositories';
 
@@ -37,7 +37,7 @@ export const RepositoryDetails: React.FC<RepositoryDetailsProps> = ({
   }
 
   if (isLoading) {
-    return <Loader />;
+    return <RepositoryListSkeleton />;
   }
 
   if (!data) {
