@@ -1,7 +1,7 @@
 import { Text } from '@radix-ui/themes';
 import { useSearch } from '@tanstack/react-router';
 
-export const RepositoryPage: React.FC = () => {
+export const RepositoryDetailsPage: React.FC = () => {
   const { name } = useSearch({ from: '/repository' });
 
   return (
