@@ -42,7 +42,10 @@ export const Repository: React.FC<RepositoryProps> = ({ repository }) => {
   return (
     <Flex className={repositoryCard} onClick={handleClick}>
       <div className={repositoryHeader}>
-        <RepositoryLogo repository={repository} />
+        <RepositoryLogo
+          repo_owner={repository.repo_owner}
+          repo_name={repository.repo_name}
+        />
         <div className={repositoryInfo}>
           <Text className={repositoryName} size="4" weight="bold">
             {repository.repo_name}

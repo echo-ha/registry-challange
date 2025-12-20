@@ -1,4 +1,3 @@
-import type { DockerHubRepository } from 'src/api/dockerhub.types';
 import fallbackRepoLogo from 'src/assets/fallback-repo-logo.svg';
 import {
   repositoryLogo,
@@ -7,25 +6,29 @@ import {
 import { useGetDockerhubOrganization } from 'src/stores/repositories';
 
 type RepositoryLogoProps = {
-  repository: DockerHubRepository;
+  repo_owner: string;
+  repo_name: string;
+  size?: number;
 };
 
 export const RepositoryLogo: React.FC<RepositoryLogoProps> = ({
-  repository
+  repo_name,
+  repo_owner,
+  size = 48
 }) => {
-  const { data: orgData } = useGetDockerhubOrganization(repository.repo_owner);
+  const { data: orgData } = useGetDockerhubOrganization(repo_owner);
 
   const orgLogoUrl = orgData?.gravatar_url || null;
   const logoUrl = `https://hub.docker.com/api/media/repos_logo/v1/${encodeURIComponent(
-    `${repository.repo_owner}/${repository.repo_name}`
+    `${repo_owner}/${repo_name}`
   )}?type=logo`;
 
   return (
-    <div className={repositoryLogo}>
+    <div className={repositoryLogo} style={{ width: size, height: size }}>
       <img
         className={repositoryLogoImage}
         src={logoUrl}
-        alt={`${repository.repo_name} logo`}
+        alt={`${repo_name} logo`}
         onError={e => {
           const img = e.target as HTMLImageElement;
           const currentSrc = img.src;
