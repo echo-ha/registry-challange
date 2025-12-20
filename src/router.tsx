@@ -30,7 +30,7 @@ const repositoryRoute = createRoute({
   component: RepositoryPage
 });
 
-const catchAllRoute = createRoute({
+const fallbackRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '$',
   beforeLoad: () => {
@@ -39,7 +39,7 @@ const catchAllRoute = createRoute({
 });
 
 export const router = createRouter({
-  routeTree: rootRoute.addChildren([indexRoute, repositoryRoute, catchAllRoute])
+  routeTree: rootRoute.addChildren([indexRoute, repositoryRoute, fallbackRoute])
 });
 
 // this is needed for autocomplete and type safety
