@@ -49,24 +49,3 @@ export const tagMeta = style({
   flexDirection: 'column',
   gap: themeVars.spacing.small
 });
-
-export const copyButton = style({
-  flexShrink: 0,
-  cursor: 'pointer',
-  backgroundColor: 'transparent',
-  border: 'none',
-  padding: themeVars.spacing.small,
-  borderRadius: 4,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  color: 'var(--gray-11)',
-  transition: 'all 0.2s ease',
-  ':hover': {
-    backgroundColor: 'var(--gray-5)',
-    color: 'var(--gray-12)'
-  },
-  ':active': {
-    transform: 'scale(0.95)'
-  }
-});

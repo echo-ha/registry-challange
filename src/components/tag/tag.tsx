@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { CopyIcon } from '@radix-ui/react-icons';
-import { Flex, Text } from '@radix-ui/themes';
+import { Flex, IconButton, Text, Tooltip } from '@radix-ui/themes';
 
 import type { DockerHubTag } from 'src/api/dockerhub.types';
 import {
-  copyButton,
   tagCard,
   tagHeader,
   tagInfo,
@@ -27,6 +26,7 @@ const formatSize = (bytes: number): string => {
 
 export const Tag: React.FC<TagProps> = ({ tag, repoName }) => {
   const [copied, setCopied] = useState(false);
+  const [tooltipOpen, setTooltipOpen] = useState<boolean>(false);
 
   const dockerPullCommand = `docker pull ${repoName}:${tag.name}`;
 
@@ -35,7 +35,11 @@ export const Tag: React.FC<TagProps> = ({ tag, repoName }) => {
     try {
       await navigator.clipboard.writeText(dockerPullCommand);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      setTooltipOpen(true);
+      setTimeout(() => {
+        setCopied(false);
+        setTooltipOpen(false);
+      }, 2000);
     } catch (err) {
       console.error('Failed to copy:', err);
     }
@@ -61,14 +65,22 @@ export const Tag: React.FC<TagProps> = ({ tag, repoName }) => {
             </Text>
           </div>
         </div>
-        <button
-          className={copyButton}
-          onClick={handleCopy}
-          title={copied ? 'Copied!' : 'Copy docker pull command'}
-          aria-label="Copy docker pull command"
+        <Tooltip
+          content={copied ? 'Copied!' : 'Copy docker pull command'}
+          open={tooltipOpen}
+          onOpenChange={open => {
+            setTooltipOpen(open);
+          }}
         >
-          <CopyIcon width="16" height="16" />
-        </button>
+          <IconButton
+            variant="ghost"
+            size="2"
+            onClick={handleCopy}
+            aria-label="Copy docker pull command"
+          >
+            <CopyIcon width="16" height="16" />
+          </IconButton>
+        </Tooltip>
       </div>
     </Flex>
   );
