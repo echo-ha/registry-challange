@@ -1,7 +1,8 @@
-import createError from 'http-errors';
+import createError, { BadRequest } from 'http-errors';
 
 import type {
   DockerHubOrganization,
+  DockerHubRepositoryDetails,
   DockerHubSearchResponse,
   SearchRepositoriesParams
 } from 'src/api/dockerhub.types';
@@ -57,11 +58,32 @@ export const getOrganization = async (
   orgName: string
 ): Promise<DockerHubOrganization> => {
   if (!orgName) {
-    throw createError(400, 'Organization name is required');
+    throw BadRequest('Organization name is required');
   }
 
   const url = new URL(
     `${PROXY_BASE_URL}/orgs/${orgName}`,
+    window.location.origin
+  );
+
+  const response = await fetch(url.toString());
+
+  if (!response.ok) {
+    throw createError(response.status, response.statusText);
+  }
+
+  return response.json();
+};
+
+export const getRepositoryDetails = async (
+  repoName: string
+): Promise<DockerHubRepositoryDetails> => {
+  if (!repoName) {
+    throw BadRequest('Repository name is required');
+  }
+
+  const url = new URL(
+    `${PROXY_BASE_URL}/repositories/${repoName}`,
     window.location.origin
   );
 
