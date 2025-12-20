@@ -78,7 +78,7 @@ export const getOrganization = async (
 export const getRepositoryDetails = async (
   repoName: string
 ): Promise<DockerHubRepositoryDetails> => {
-  if (!repoName) {
+  if (!repoName || !repoName.includes('/')) {
     throw BadRequest('Repository name is required');
   }
 
