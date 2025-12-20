@@ -42,6 +42,7 @@ export const router = createRouter({
   routeTree: rootRoute.addChildren([indexRoute, repositoryRoute, catchAllRoute])
 });
 
+// this is needed for autocomplete and type safety
 declare module '@tanstack/react-router' {
   interface Register {
     router: typeof router;
