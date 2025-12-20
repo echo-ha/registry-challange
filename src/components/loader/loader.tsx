@@ -1,6 +1,6 @@
 import { Flex, Skeleton } from '@radix-ui/themes';
 
-import { loader } from 'src/components/loader/loader.css';
+import { repositoriesList } from 'src/components/repositories/repositories.css';
 import {
   repositoryCard,
   repositoryDescription,
@@ -30,7 +30,7 @@ const SkeletonCard: React.FC = () => {
 
 export const Loader: React.FC = () => {
   return (
-    <div className={loader}>
+    <div className={repositoriesList}>
       {Array.from({ length: 9 }).map((_, index) => (
         <SkeletonCard key={index} />
       ))}
