@@ -1,14 +1,11 @@
-import { CheckCircledIcon } from '@radix-ui/react-icons';
 import { Flex, Text } from '@radix-ui/themes';
 
-import { OFFICIAL_REPO_OWNER } from 'src/api/dockerhub';
+import { RepoOwner } from 'src/components/repo-owner/repo-owner';
 import {
   repositoryDescription,
   repositoryHeader,
   repositoryInfo,
-  repositoryName,
-  repositoryOfficial,
-  repositoryOwner
+  repositoryName
 } from 'src/components/repository/repository.css';
 import { RepositoryListSkeleton } from 'src/components/repository-list-skeleton/repository-list-skeleton';
 import { RepositoryLogo } from 'src/components/repository-logo/repository-logo';
@@ -42,29 +39,11 @@ export const RepositoryDetails: React.FC<RepositoryDetailsProps> = ({
 
   if (!data) {
     return (
-      <>
-        <Text size="6" weight="bold">
-          Repository Page
-        </Text>
-        <Text size="3" color="red">
-          Failed to load repository details for: {name}
-        </Text>
-      </>
+      <Text size="3" color="red">
+        Failed to load repository details for: {name}
+      </Text>
     );
   }
-
-  const isOfficial = data.namespace === OFFICIAL_REPO_OWNER;
-
-  const ownerDisplay = isOfficial ? (
-    <Flex className={repositoryOfficial} align="center" gap="1">
-      <CheckCircledIcon />
-      <Text size="2">Official repository</Text>
-    </Flex>
-  ) : (
-    <Text className={repositoryOwner} size="2" color="gray">
-      by: {data.namespace}
-    </Text>
-  );
 
   const lastUpdatedDate = new Date(data.last_updated).toLocaleDateString();
 
@@ -80,7 +59,7 @@ export const RepositoryDetails: React.FC<RepositoryDetailsProps> = ({
           <Text className={repositoryName} size="6" weight="bold">
             {data.name}
           </Text>
-          {ownerDisplay}
+          <RepoOwner owner={data.namespace} />
           <Text size="2" color="gray">
             Last updated: {lastUpdatedDate}
           </Text>
