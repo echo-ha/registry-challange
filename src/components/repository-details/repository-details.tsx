@@ -10,7 +10,7 @@ type RepositoryDetailsProps = {
 export const RepositoryDetails: React.FC<RepositoryDetailsProps> = ({
   name
 }) => {
-  const { data } = useGetRepositoryDetails(name);
+  const { data } = useGetRepositoryDetails(name!);
 
   useEffect(() => {
     if (data) {
