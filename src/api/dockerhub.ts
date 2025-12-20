@@ -4,6 +4,7 @@ import type {
   DockerHubOrganization,
   DockerHubRepositoryDetails,
   DockerHubSearchResponse,
+  DockerHubTagResponse,
   SearchRepositoriesParams
 } from 'src/api/dockerhub.types';
 
@@ -84,6 +85,29 @@ export const getRepositoryDetails = async (
 
   const url = new URL(
     `${PROXY_BASE_URL}/repositories/${repoName}`,
+    window.location.origin
+  );
+
+  const response = await fetch(url.toString());
+
+  if (!response.ok) {
+    throw createError(response.status, response.statusText);
+  }
+
+  return response.json();
+};
+
+export const getRepositoryTags = async (
+  repoName: string
+): Promise<DockerHubTagResponse> => {
+  if (!repoName || !repoName.includes('/')) {
+    throw BadRequest('Repository name is required');
+  }
+
+  const [namespace, name] = repoName.split('/');
+
+  const url = new URL(
+    `${PROXY_BASE_URL}/namespaces/${namespace}/repositories/${name}/tags`,
     window.location.origin
   );
 
