@@ -1,6 +1,6 @@
 import { EmptyState } from 'src/components/empty-state/empty-state';
+import { GridSkeleton } from 'src/components/grid-skeleton/grid-skeleton';
 import { repositoriesList } from 'src/components/repositories/repositories.css';
-import { RepositoryListSkeleton } from 'src/components/repository-list-skeleton/repository-list-skeleton';
 import { Tag } from 'src/components/tag/tag';
 import { useGetRepositoryTags } from 'src/stores/repositories';
 
@@ -13,7 +13,7 @@ export const RepositoryTags: React.FC<RepositoryTagsProps> = ({ repoName }) => {
     useGetRepositoryTags(repoName);
 
   if (tagsLoading) {
-    return <RepositoryListSkeleton />;
+    return <GridSkeleton />;
   }
 
   if (!tagsData || !tagsData.results || tagsData.results.length === 0) {

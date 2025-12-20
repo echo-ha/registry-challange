@@ -9,7 +9,7 @@ import {
   repositoryLogo
 } from 'src/components/repository/repository.css';
 
-const SkeletonCard: React.FC = () => {
+const GridItemSkeleton: React.FC = () => {
   return (
     <Flex className={repositoryCard}>
       <div className={repositoryHeader}>
@@ -28,11 +28,11 @@ const SkeletonCard: React.FC = () => {
   );
 };
 
-export const RepositoryListSkeleton: React.FC = () => {
+export const GridSkeleton: React.FC = () => {
   return (
     <div className={repositoriesList}>
       {Array.from({ length: 9 }).map((_, index) => (
-        <SkeletonCard key={index} />
+        <GridItemSkeleton key={index} />
       ))}
     </div>
   );
