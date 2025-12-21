@@ -71,13 +71,7 @@ export const repositoryOfficial = style({
   color: themeVars.color.echoGreen,
   display: 'flex',
   alignItems: 'center',
-  gap: themeVars.spacing.small,
-  selectors: {
-    '& svg': {
-      color: themeVars.color.echoGreen,
-      fill: themeVars.color.echoGreen
-    }
-  }
+  gap: themeVars.spacing.small
 });
 
 export const repositoryDescription = style({
