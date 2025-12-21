@@ -18,7 +18,7 @@ export const tagCard = style({
     backgroundColor: 'var(--gray-4)',
     borderColor: 'var(--gray-7)',
     transform: 'translateY(-2px)',
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
+    boxShadow: themeVars.shadow.card
   }
 });
 
