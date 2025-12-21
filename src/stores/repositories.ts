@@ -15,7 +15,7 @@ import type {
   SearchRepositoriesParams
 } from 'src/api/dockerhub.types';
 
-const normalizeRepoName = (repoName: string) => {
+export const normalizeRepoName = (repoName: string) => {
   if (!repoName?.includes('/')) {
     return `${OFFICIAL_REPO_OWNER}/${repoName}`;
   }
