@@ -86,8 +86,10 @@ export const getRepositoryDetails = async (
   repoName: string
 ): Promise<DockerHubRepositoryDetails> => {
   validateRepoName(repoName);
+  const [namespace, name] = repoName.split('/');
+
   const url = new URL(
-    `${PROXY_BASE_URL}/repositories/${repoName}`,
+    `${PROXY_BASE_URL}/namespaces/${namespace}/repositories/${name}`,
     window.location.origin
   );
 
