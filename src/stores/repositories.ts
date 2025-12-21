@@ -54,13 +54,7 @@ export const useGetRepositoryDetails = (repoName: string) => {
 export const useGetRepositoryTags = (repoName: string) => {
   const queryRepoName = normalizeRepoName(repoName);
 
-  return useInfiniteQuery<
-    DockerHubTagResponse,
-    Error,
-    DockerHubTagResponse,
-    string[],
-    number
-  >({
+  return useInfiniteQuery<DockerHubTagResponse>({
     queryKey: ['dockerhub', 'repository', queryRepoName, 'tags'],
     queryFn: ({ pageParam = 1 }) =>
       getRepositoryTags(queryRepoName, pageParam as number),
