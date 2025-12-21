@@ -101,7 +101,8 @@ export const getRepositoryDetails = async (
 };
 
 export const getRepositoryTags = async (
-  repoName: string
+  repoName: string,
+  page?: number
 ): Promise<DockerHubTagResponse> => {
   validateRepoName(repoName);
   const [namespace, name] = repoName.split('/');
@@ -110,6 +111,11 @@ export const getRepositoryTags = async (
     window.location.origin
   );
 
+  if (page) {
+    url.searchParams.set('page', page.toString());
+  }
+
+  url.searchParams.set('page_size', '9');
   const response = await fetch(url.toString());
 
   if (!response.ok) {

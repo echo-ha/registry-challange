@@ -1,5 +1,6 @@
 import { Flex, Text } from '@radix-ui/themes';
 
+import { GridSkeleton } from 'src/components/grid-skeleton/grid-skeleton';
 import { RepoOwner } from 'src/components/repo-owner/repo-owner';
 import {
   repositoryDescription,
@@ -7,8 +8,8 @@ import {
   repositoryInfo,
   repositoryName
 } from 'src/components/repository/repository.css';
-import { RepositoryListSkeleton } from 'src/components/repository-list-skeleton/repository-list-skeleton';
 import { RepositoryLogo } from 'src/components/repository-logo/repository-logo';
+import { RepositoryTags } from 'src/components/repository-tags/repository-tags';
 import { useGetRepositoryDetails } from 'src/stores/repositories';
 
 type RepositoryDetailsProps = {
@@ -34,7 +35,7 @@ export const RepositoryDetails: React.FC<RepositoryDetailsProps> = ({
   }
 
   if (isLoading) {
-    return <RepositoryListSkeleton />;
+    return <GridSkeleton />;
   }
 
   if (!data) {
@@ -45,7 +46,10 @@ export const RepositoryDetails: React.FC<RepositoryDetailsProps> = ({
     );
   }
 
-  const lastUpdatedDate = new Date(data.last_updated).toLocaleDateString();
+  const lastUpdatedDate = new Date(data.last_updated).toLocaleDateString(
+    'en-GB'
+  );
+  const fullRepoName = `${data.namespace}/${data.name}`;
 
   return (
     <Flex direction="column" gap="4">
@@ -70,6 +74,7 @@ export const RepositoryDetails: React.FC<RepositoryDetailsProps> = ({
           {data.description}
         </Text>
       )}
+      <RepositoryTags repoName={fullRepoName} />
     </Flex>
   );
 };

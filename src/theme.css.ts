@@ -21,6 +21,9 @@ export const [themeClass, themeVars] = createTheme({
     large: '16px',
     XL: '24px',
     XXL: '32px'
+  },
+  shadow: {
+    card: '0 4px 12px rgba(0, 0, 0, 0.15)'
   }
 });
 

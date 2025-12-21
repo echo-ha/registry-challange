@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 import {
   getOrganization,
@@ -54,9 +54,19 @@ export const useGetRepositoryDetails = (repoName: string) => {
 export const useGetRepositoryTags = (repoName: string) => {
   const queryRepoName = normalizeRepoName(repoName);
 
-  return useQuery<DockerHubTagResponse>({
+  return useInfiniteQuery<DockerHubTagResponse>({
     queryKey: ['dockerhub', 'repository', queryRepoName, 'tags'],
-    queryFn: () => getRepositoryTags(queryRepoName),
+    queryFn: ({ pageParam = 1 }) =>
+      getRepositoryTags(queryRepoName, pageParam as number),
+    getNextPageParam: lastPage => {
+      if (lastPage.next) {
+        const url = new URL(lastPage.next);
+        const page = url.searchParams.get('page');
+        return page ? parseInt(page, 10) : undefined;
+      }
+      return undefined;
+    },
+    initialPageParam: 1,
     enabled: !!repoName
   });
 };
